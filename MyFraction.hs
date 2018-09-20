@@ -91,50 +91,50 @@ infix 4 <==>
 
 ----------------------------- functions for quickcheck ------------------------
 
--- prop_ratplus_unit :: Fraction -> Property
--- prop_ratplus_unit (a,b) = b > 0 ==>(a, b) <+> (0,1) <==> (a, b)
+prop_ratplus_unit :: Fraction -> Property
+prop_ratplus_unit (a,b) = b > 0 ==>(a, b) <+> (0,1) <==> (a, b)
 
--- -- 乘法分配律
--- prop_rattimes_plus_distr :: Fraction -> Fraction -> Fraction -> Property
--- prop_rattimes_plus_distr (a,b) (c,d) (e,f) =
---     b > 0 && d > 0 && f > 0 ==>
---     (a,b) <-*-> ((c,d) <+> (e,f)) <==> ((a,b) <-*-> (c,d)) <+> ((a,b) <-*-> (e,f))
+-- 乘法分配律
+prop_rattimes_plus_distr :: Fraction -> Fraction -> Fraction -> Property
+prop_rattimes_plus_distr (a,b) (c,d) (e,f) =
+    b > 0 && d > 0 && f > 0 ==>
+    (a,b) <-*-> ((c,d) <+> (e,f)) <==> ((a,b) <-*-> (c,d)) <+> ((a,b) <-*-> (e,f))
 
--- -- 加法结合律
--- prop_ratplus_associative :: Fraction -> Fraction -> Fraction -> Property
--- prop_ratplus_associative (a,b) (c,d) (e,f) =
---     b > 0 && d > 0 && f > 0 ==>
---     (a,b) <+> ((c,d) <+> (e,f)) <==> ((a,b) <+> (c,d)) <+> (e,f)
+-- 加法结合律
+prop_ratplus_associative :: Fraction -> Fraction -> Fraction -> Property
+prop_ratplus_associative (a,b) (c,d) (e,f) =
+    b > 0 && d > 0 && f > 0 ==>
+    (a,b) <+> ((c,d) <+> (e,f)) <==> ((a,b) <+> (c,d)) <+> (e,f)
 
--- -- 乘法结合律
--- prop_rattimes_associative :: Fraction -> Fraction -> Fraction -> Property
--- prop_rattimes_associative (a,b) (c,d) (e,f) =
---     b > 0 && d > 0 && f > 0 ==>
---     (a,b) <-*-> ((c,d) <-*-> (e,f)) <==> ((a,b) <-*-> (c,d)) <-*-> (e,f)
+-- 乘法结合律
+prop_rattimes_associative :: Fraction -> Fraction -> Fraction -> Property
+prop_rattimes_associative (a,b) (c,d) (e,f) =
+    b > 0 && d > 0 && f > 0 ==>
+    (a,b) <-*-> ((c,d) <-*-> (e,f)) <==> ((a,b) <-*-> (c,d)) <-*-> (e,f)
 
--- -- 加法交换律
--- prop_ratplus_commutative :: Fraction -> Fraction -> Property
--- prop_ratplus_commutative (a,b) (c,d) = 
---     b > 0 && d > 0 ==>
---     (a, b) <+> (c, d) <==> (c, d) <+> (a, b) 
+-- 加法交换律
+prop_ratplus_commutative :: Fraction -> Fraction -> Property
+prop_ratplus_commutative (a,b) (c,d) = 
+    b > 0 && d > 0 ==>
+    (a, b) <+> (c, d) <==> (c, d) <+> (a, b) 
 
--- -- 乘法交换律
--- prop_rattimes_commutative :: Fraction -> Fraction -> Property
--- prop_rattimes_commutative (a,b) (c,d) = 
---     b > 0 && d > 0 ==>
---     (a, b) <-*-> (c, d) <==> (c, d) <-*-> (a, b) 
+-- 乘法交换律
+prop_rattimes_commutative :: Fraction -> Fraction -> Property
+prop_rattimes_commutative (a,b) (c,d) = 
+    b > 0 && d > 0 ==>
+    (a, b) <-*-> (c, d) <==> (c, d) <-*-> (a, b) 
 
--- -- 除法和乘法的等价性
--- prop_times_div_equation :: Fraction -> Fraction -> Property
--- prop_times_div_equation (a,b) (c,d) =
---     b /= 0 && d /= 0 && a /= 0 && c /= 0 ==>
---     (a,b) <-*-> (c,d) <==> (a,b) </> (d,c)
+-- 除法和乘法的等价性
+prop_times_div_equation :: Fraction -> Fraction -> Property
+prop_times_div_equation (a,b) (c,d) =
+    b /= 0 && d /= 0 && a /= 0 && c /= 0 ==>
+    (a,b) <-*-> (c,d) <==> (a,b) </> (d,c)
 
--- -- 加法和减法的等价性
--- prop_plus_minus_equation :: Fraction -> Fraction -> Property
--- prop_plus_minus_equation (a,b) (c,d) =
---     b /= 0 && d /= 0 && a /= 0 && c /= 0 ==>
---     (a,b) <+> (c,d) <==> (a,b) <-> ((-c),d)
+-- 加法和减法的等价性
+prop_plus_minus_equation :: Fraction -> Fraction -> Property
+prop_plus_minus_equation (a,b) (c,d) =
+    b /= 0 && d /= 0 && a /= 0 && c /= 0 ==>
+    (a,b) <+> (c,d) <==> (a,b) <-> ((-c),d)
 
--- return []
--- runTests = $quickCheckAll
+return []
+runTests = $quickCheckAll
