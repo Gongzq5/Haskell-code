@@ -69,23 +69,23 @@ simplify (a, b) =
 
 ------------------------------ define of operators ----------------------------
 
-infix 5 <+>
+infixl 5 <+>
 (<+>) :: Fraction -> Fraction -> Fraction
 (<+>) (a,b) (c,d) = ratplus (a,b) (c,d)
 
-infix 6 <-*->
+infixl 6 <-*->
 (<-*->) :: Fraction -> Fraction -> Fraction
 (<-*->) (a,b) (c,d) = rattimes (a,b) (c,d)
 
-infix 5 <->
+infixl 5 <->
 (<->) :: Fraction -> Fraction -> Fraction
 (<->) (a,b) (c,d) = ratminus (a,b) (c,d)
 
-infix 6 </>
+infixl 6 </>
 (</>) :: Fraction -> Fraction -> Fraction
 (</>) (a,b) (c,d) = ratdiv (a,b) (c,d)
 
-infix 4 <==>
+infixl 4 <==>
 (<==>) :: Fraction -> Fraction -> Bool
 (<==>) (a,b) (c,d) = rateq (a,b) (c,d) 
 
@@ -135,6 +135,10 @@ prop_plus_minus_equation :: Fraction -> Fraction -> Property
 prop_plus_minus_equation (a,b) (c,d) =
     b /= 0 && d /= 0 && a /= 0 && c /= 0 ==>
     (a,b) <+> (c,d) <==> (a,b) <-> ((-c),d)
+
+prop_floor :: Fraction -> Property
+prop_floor (a,b) = (a*b) > 0 ==> 0 <= f && f <= (div a b) where f = ratfloor (a,b)
+
 
 return []
 runTests = $quickCheckAll
