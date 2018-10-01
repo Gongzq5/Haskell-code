@@ -2,16 +2,16 @@
 
 -- Recursive excersice
 -- http://elearning.sysu.edu.cn/webapps/blackboard/execute/displayLearningUnit?course_id=_11359_1&content_id=_257011_1
--- 2018-09-24
+-- 2018-10-01
 -- by gongzq
 
 import Test.QuickCheck
 
-myGCD :: Integer -> Integer -> Integer
-myGCD x y = if 0 == y then x
+mygcd :: Integer -> Integer -> Integer
+mygcd x y = if 0 == y then x
             else if 0 == x then y
-            else if x < y then myGCD x (y-x) 
-            else myGCD (x-y) y
+            else if x < y then mygcd x (y-x) 
+            else mygcd (x-y) y
 
 fac :: Integer -> Integer
 fac x = if x <= 1 then 1
@@ -24,6 +24,22 @@ sumFacs n = if n <= 0 then fac 0
 sumFun :: (Integer -> Integer) -> Integer -> Integer
 sumFun f n = if n <= 0 then f 0
              else sumFun f (n-1) + f n
-             
-prop_myGCD :: Integer -> Integer -> Property
-prop_myGCD x y = x > 0 && y > 0 ==> myGCD x y == gcd x y
+
+maxFun :: (Integer -> Integer) -> Integer -> Integer
+maxFun f n = if n == 1 then max (f 1) (f 0)
+             else max (f n) (maxFun f (n-1))
+
+fib :: Integer ->Integer
+fib n = if 0 == n then 0
+        else if 1 == n then 1
+        else fib (n-1) + fib (n-2)
+
+sqrt2 :: Float ->Integer ->Float
+sqrt2 x0 n = if 0 == n then x0
+             else sqrt2 ((x0 + 2 / x0) / 2) (n-1)
+
+solve :: Float -> Float -> Float -> (Float, Float)
+solve a b c = if delta < 0 then error "discriminant smaller than 0, so the function has no answer"
+              else ( ( (-b + sqrt delta) / (2*a) ) ,  (-b - sqrt delta) / (2*a)  )
+              where
+                delta = (b*b - 4*a*c)
